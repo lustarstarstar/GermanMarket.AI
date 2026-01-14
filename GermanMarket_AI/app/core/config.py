@@ -88,12 +88,22 @@ class AppSettings(BaseSettings):
     db: DatabaseConfig = Field(default_factory=DatabaseConfig)
     nlp: NLPConfig = Field(default_factory=NLPConfig)
     
-    # 业务参数
-    sentiment_threshold_positive: float = 0.6
-    sentiment_threshold_negative: float = 0.4
-    
-    # ABSA维度配置
-    aspect_categories: dict = Field(default={
+    # ========== 运营可调整的阈值 ==========
+    # 情感分析阈值
+    threshold_positive: float = 0.6  # 高于此值 = 好评
+    threshold_negative: float = 0.4  # 低于此值 = 差评
+
+    # 维度分析阈值
+    aspect_good: float = 0.7    # 维度得分高于此值 = 优秀
+    aspect_bad: float = 0.4     # 维度得分低于此值 = 需改进
+    aspect_min_count: int = 3   # 维度至少被提及N次才统计
+
+    # 报告警告阈值
+    alert_neg_rate: float = 0.4   # 差评率超过此值 = 警告
+    alert_pos_rate: float = 0.6   # 好评率超过此值 = 优秀
+
+    # ABSA维度映射（德语 -> 中文）
+    aspect_map: dict = Field(default={
         "Lieferung": "物流",
         "Qualität": "质量",
         "Aussehen": "外观",

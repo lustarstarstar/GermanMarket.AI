@@ -215,28 +215,50 @@ elif page == "✍️ 内容生成":
 elif page == "⚙️ 设置":
     st.header("系统设置")
 
-    st.subheader("数据库配置")
-    st.code("""
-# .env 配置示例
-DB_HOST=your-mysql-host.com
-DB_PORT=3306
-DB_USER=your_user
-DB_PASSWORD=your_password
-DB_NAME=german_market_ai
-    """)
+    # ===== 分析阈值设置（运营可调整）=====
+    st.subheader("📊 分析阈值设置")
+    st.caption("调整这些参数来改变分析的判定标准")
 
-    st.subheader("推荐的云MySQL服务")
-    st.markdown("""
-    | 服务 | 特点 | 免费额度 |
-    |------|------|----------|
-    | **PlanetScale** | Serverless, 快速 | 5GB存储, 1B读取 |
-    | **Railway** | 简单, 一键部署 | $5/月额度 |
-    | **TiDB Cloud** | 国内团队, 兼容性好 | 5GB存储 |
-    """)
+    col1, col2 = st.columns(2)
+    with col1:
+        pos_threshold = st.slider(
+            "好评阈值", 0.5, 0.9, 0.6, 0.05,
+            help="情感得分高于此值判定为好评"
+        )
+        neg_threshold = st.slider(
+            "差评阈值", 0.1, 0.5, 0.4, 0.05,
+            help="情感得分低于此值判定为差评"
+        )
+    with col2:
+        aspect_good = st.slider(
+            "维度优秀阈值", 0.6, 0.9, 0.7, 0.05,
+            help="维度得分高于此值显示为优秀"
+        )
+        aspect_bad = st.slider(
+            "维度警告阈值", 0.2, 0.5, 0.4, 0.05,
+            help="维度得分低于此值显示为需改进"
+        )
 
-    st.subheader("API密钥")
+    min_mentions = st.number_input(
+        "维度最少提及次数", 1, 10, 3,
+        help="维度至少被提及N次才纳入统计"
+    )
+
+    if st.button("💾 保存设置"):
+        st.session_state['config'] = {
+            'threshold_positive': pos_threshold,
+            'threshold_negative': neg_threshold,
+            'aspect_good': aspect_good,
+            'aspect_bad': aspect_bad,
+            'aspect_min_count': min_mentions
+        }
+        st.success("✅ 设置已保存")
+
+    st.markdown("---")
+
+    # ===== API密钥 =====
+    st.subheader("🔑 API密钥")
     st.text_input("DeepSeek API Key", type="password", help="用于内容生成")
-    st.text_input("OpenAI API Key", type="password", help="备用")
 
 
 # 页脚
