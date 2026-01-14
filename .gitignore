@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 虚拟环境
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 模型缓存（太大）
+*.bin
+*.pt
+*.pth
+models/
+model_cache/
+
+# 数据文件
+data/raw/
+data/processed/
+*.csv
+*.xlsx
+*.json
+
+# 日志
+logs/
+*.log
+
+# 缓存
+.cache/
+*.cache
+
+# 数据库
+*.db
+*.sqlite
+*.sqlite3
+
+# 旧项目
+CrossBorder_AI_Nexus/
+

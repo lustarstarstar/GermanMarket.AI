@@ -1,0 +1,30 @@
+# GermanMarket.AI 依赖
+# =====================
+
+# Web框架
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.6
+
+# 数据验证
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# 数据库
+sqlalchemy>=2.0.25
+pymysql>=1.1.0
+aiomysql>=0.2.0
+cryptography>=42.0.0
+
+# NLP/ML
+torch>=2.1.0
+transformers>=4.36.0
+sentencepiece>=0.1.99
+
+# 工具
+tqdm>=4.66.0
+python-dotenv>=1.0.0
+
+# 开发工具
+httpx>=0.26.0  # API测试
+
